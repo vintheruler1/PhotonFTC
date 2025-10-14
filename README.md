@@ -1,9 +1,6 @@
-# NOTICE - ARCHIVED
+# NOTICE - Forked
 
-It's been a fun road, but I unfortunately am finding myself with less and less time to maintain this. It isn't really in a stable state and I know the path to fix it, but I do not have time to make the changes. If someone wants to fork and maintain it feel free and I'll throw my support behind that, but other then that, thank everyone so much for the wonderful journey that this has been, and I hope that I at least was able to provide some level of advancement to some teams through this.
-
-- Eeshwar
-
+Hi I'm Vin and this is a fork of Eeshwar's PhotonFTC lib. Goal in mind is to keep it maintained / add on things so it works for DECODE.
 
 # PhotonFTC
 [![](https://jitpack.io/v/Eeshwar-Krishnan/PhotonFTC.svg)](https://jitpack.io/#Eeshwar-Krishnan/PhotonFTC)
@@ -13,7 +10,7 @@ NOTE: This code will ONLY work on the REV Robotics Expansion Hub or REV Robotics
 This project is an initiative to push the FIRST api to its absolute limits, and to **give access to functionality and methods not normally exposed to the user**
 
 ## Documentation:
- - [PhotonCore Overview](https://photondocs.pages.dev/)
+ - [Legacy PhotonCore Overview](https://photondocs.pages.dev/)
 
 ## Installation instructions :
 Installation is simple. Just go to build.gradle in your Teamcode module and add the following under repositories
