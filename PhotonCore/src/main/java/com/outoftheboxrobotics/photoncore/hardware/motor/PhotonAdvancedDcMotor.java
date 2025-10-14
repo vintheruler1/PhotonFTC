@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class PhotonAdvancedDcMotor {
     private final PhotonDcMotor motor;
 
-    private double cacheTolerance = 0.001;
+    private double cacheTolerance = 0.01;
     private double powerMemory = 0;
 
     private boolean setRefreshRate = false;
