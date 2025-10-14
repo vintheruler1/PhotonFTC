@@ -7,13 +7,19 @@ repositories {
     mavenCentral()
 }
 
+configurations.all {
+    resolutionStrategy {
+        force 'androidx.annotation:annotation:1.1.0'
+    }
+}
+
 android {
-    compileSdkVersion 29
+    compileSdkVersion 34
 
     defaultConfig {
         minSdkVersion 24
         //noinspection ExpiredTargetSdkVersion
-        targetSdkVersion 28
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
     }
@@ -43,7 +49,7 @@ afterEvaluate {
 
 dependencies {
     compileOnly 'org.jetbrains:annotations:15.0'
-    compileOnly "androidx.annotation:annotation:1.7.0"
+    compileOnly "androidx.annotation:annotation:1.1.0"
 
     implementation 'org.firstinspires.ftc:RobotCore:11.0.0'
     implementation 'org.firstinspires.ftc:Hardware:11.0.0'
