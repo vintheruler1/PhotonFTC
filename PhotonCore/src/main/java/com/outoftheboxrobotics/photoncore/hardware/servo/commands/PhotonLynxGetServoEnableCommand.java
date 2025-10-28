@@ -12,7 +12,7 @@ import com.qualcomm.hardware.lynx.commands.standard.LynxNack;
 import java.util.concurrent.CompletableFuture;
 
 public class PhotonLynxGetServoEnableCommand extends LynxGetServoEnableCommand implements PhotonCommandBase {
-    private CompletableFuture<LynxMessage> future = new CompletableFuture<>();
+    private CompletableFuture<LynxMessage> future;
 
     public PhotonLynxGetServoEnableCommand(LynxModuleIntf module, int channelZ) {
         super(module, channelZ);

@@ -27,9 +27,6 @@ import com.qualcomm.robotcore.hardware.DcMotorImpl;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.configuration.ConfigurationTypeManager;
-import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
-import com.qualcomm.robotcore.hardware.configuration.typecontainers.ServoConfigurationType;
 import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.ftccommon.external.OnCreateEventLoop;
@@ -49,8 +46,6 @@ public class PhotonCore implements OpModeManagerNotifier.Notifications {
     public static Photon photon;
 
     private OpModeManagerImpl opModeManager;
-
-    public static int state = 0;
 
     private HashMap<LynxModuleIntf, Semaphore> mutexs;
 
@@ -73,16 +68,11 @@ public class PhotonCore implements OpModeManagerNotifier.Notifications {
 
     @Override
     public void onOpModePreInit(OpMode opMode) {
-        if(opModeManager.getActiveOpModeName().equals(OpModeManager.DEFAULT_OP_MODE_NAME)) {
-            state = 0;
+        if(opModeManager.getActiveOpModeName().equals(OpModeManager.DEFAULT_OP_MODE_NAME))
             return;
-        }
-
-        state = 1;
 
         photon = opMode.getClass().getAnnotation(Photon.class);
         if(photon!=null) {
-            RobotLog.ii(TAG, "!!! PHOTON ACTIVATED !!!");
 
             if(DEBUG) RobotLog.ii(TAG, "onOpModePreInit: Enabling PhotonCore optimizations for opMode %s", opModeManager.getActiveOpModeName());
 
@@ -129,15 +119,7 @@ public class PhotonCore implements OpModeManagerNotifier.Notifications {
                                 hardwareMap.remove(motorName, motor);
                                 hardwareMap.dcMotor.remove(motorName);
 
-                                MotorConfigurationType motorType = new MotorConfigurationType(ConfigurationTypeManager.class, motor.getMotorType().getXmlTag(), ConfigurationTypeManager.ClassSource.APK);
-                                motorType.setTicksPerRev(motor.getMotorType().getTicksPerRev());
-                                motorType.setGearing(motor.getMotorType().getGearing());
-                                motorType.setMaxRPM(motor.getMotorType().getMaxRPM());
-                                motorType.setOrientation(motor.getMotorType().getOrientation());
-                                motorType.setAchieveableMaxRPMFraction(motor.getMotorType().getAchieveableMaxRPMFraction());
-
-                                PhotonDcMotor photonDcMotor = new PhotonDcMotor(photonLynxDcMotorController, motor.getPortNumber(), motor.getDirection(), motorType);
-
+                                PhotonDcMotor photonDcMotor = new PhotonDcMotor(photonLynxDcMotorController, motor.getPortNumber());
                                 hardwareMap.dcMotor.put(motorName, photonDcMotor);
                                 hardwareMap.put(motorName, photonDcMotor);
                             }
@@ -159,7 +141,6 @@ public class PhotonCore implements OpModeManagerNotifier.Notifications {
                         hardwareMap.servoController.remove(deviceName);
                         hardwareMap.put(deviceName, photonLynxServoController);
                         hardwareMap.servoController.put(deviceName, photonLynxServoController);
-                        photonLynxServoController.initializeHardware();
                         List<Servo> servos = hardwareMap.getAll(Servo.class);
                         for(Servo servo:servos)
                         {
@@ -168,10 +149,6 @@ public class PhotonCore implements OpModeManagerNotifier.Notifications {
                                 String servoName=Objects.requireNonNull(deviceNames.get(servo)).iterator().next();
                                 hardwareMap.remove(servoName, servo);
                                 hardwareMap.servo.remove(servoName);
-
-                                ServoConfigurationType type = new ServoConfigurationType();
-                                //type.set
-
                                 PhotonServo photonServo = new PhotonServo(photonLynxServoController, servo.getPortNumber());
                                 hardwareMap.put(servoName, photonServo);
                                 hardwareMap.servo.put(servoName, photonServo);
@@ -264,7 +241,5 @@ public class PhotonCore implements OpModeManagerNotifier.Notifications {
     @Override
     public void onOpModePreStart(OpMode opMode) {}
     @Override
-    public void onOpModePostStop(OpMode opMode) {
-        state = 0;
-    }
+    public void onOpModePostStop(OpMode opMode) {}
 }

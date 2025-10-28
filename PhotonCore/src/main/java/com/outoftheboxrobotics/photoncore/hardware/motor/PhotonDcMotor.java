@@ -1,13 +1,10 @@
 package com.outoftheboxrobotics.photoncore.hardware.motor;
 
 
-import androidx.annotation.NonNull;
-
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorImplEx;
 import com.qualcomm.robotcore.hardware.PIDCoefficients;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
-import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
@@ -21,12 +18,10 @@ import java.util.concurrent.CompletableFuture;
 @SuppressWarnings({"unused"})
 public class PhotonDcMotor extends DcMotorImplEx {
     protected PhotonLynxDcMotorController controller;
-    protected int port;
 
-    public PhotonDcMotor(PhotonLynxDcMotorController controller, int port, Direction direction, @NonNull MotorConfigurationType motorType){
-        super(controller, port, direction, motorType);
+    public PhotonDcMotor(PhotonLynxDcMotorController controller, int port){
+        super(controller, port);
         this.controller=controller;
-        this.port = port;
     }
     public CompletableFuture<Double> getCurrentAsync(CurrentUnit unit)
     {
